@@ -18,10 +18,7 @@ const tarefasModel = {
     },
 
     create: async (dados) => {
-        /*
-            formato esperado:
-            { nome: "nome da tarefa", prazo: "YYYY-MM-DD" }
-        */
+
         if (!dados.nome || !dados.prazo) {
             throw new Error("Campos nome e prazo são obrigatórios.");
         }
@@ -32,7 +29,7 @@ const tarefasModel = {
         return result;
     },
 
-    // DELETE físico: remove permanentemente o registro
+
     deleteById: async (id) => {
         const [result] = await pool.query(
             "DELETE FROM tarefas WHERE id_tarefa = ?",
@@ -41,7 +38,6 @@ const tarefasModel = {
         return result;
     },
 
-    // DELETE lógico: marca status_tarefa = 0, mantendo o registro no banco
     softDeleteById: async (id) => {
         const [result] = await pool.query(
             "UPDATE tarefas SET status_tarefa = 0 WHERE id_tarefa = ?",

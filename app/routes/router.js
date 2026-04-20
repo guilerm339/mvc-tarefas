@@ -4,7 +4,6 @@ const { tarefasModel } = require("../models/tarefasModel");
 const moment = require("moment");
 moment.locale("pt-br");
 
-// ── GET / — lista todas as tarefas ativas ──────────────────────────────────
 router.get("/", async (req, res) => {
     res.locals.moment = moment;
     try {
@@ -16,12 +15,10 @@ router.get("/", async (req, res) => {
     }
 });
 
-// ── GET /cadastro — exibe o formulário ────────────────────────────────────
 router.get("/cadastro", (req, res) => {
     res.render("pages/cadastro", { erro: null, sucesso: null });
 });
 
-// ── POST /nova-tarefa — salva nova tarefa ─────────────────────────────────
 router.post("/nova-tarefa", async (req, res) => {
     try {
         await tarefasModel.create({ nome: req.body.nome, prazo: req.body.prazo });
@@ -32,7 +29,6 @@ router.post("/nova-tarefa", async (req, res) => {
     }
 });
 
-// ── GET /excluir-logico/:id — soft delete, redireciona para home ──────────
 router.get("/excluir-logico/:id", async (req, res) => {
     try {
         const result = await tarefasModel.softDeleteById(req.params.id);
@@ -46,7 +42,6 @@ router.get("/excluir-logico/:id", async (req, res) => {
     }
 });
 
-// ── GET /teste-delete/:id — hard delete (rota de teste) ───────────────────
 router.get("/teste-delete/:id", async (req, res) => {
     try {
         const result = await tarefasModel.deleteById(req.params.id);
@@ -57,7 +52,6 @@ router.get("/teste-delete/:id", async (req, res) => {
     }
 });
 
-// ── GET /teste-insert — insert de teste ───────────────────────────────────
 router.get("/teste-insert", async (req, res) => {
     try {
         const result = await tarefasModel.create({
