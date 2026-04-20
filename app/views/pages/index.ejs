@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Lista Tarefas</title>
+</head>
+<body>
+
+    <h1>Lista de Tarefas</h1>
+    <a href="/cadastro">Criar nova Tarefa</a>
+
+    <% if (erro) { %>
+        <p style="color:red;"><%= erro %></p>
+    <% } %>
+
+    <table border="1" cellpadding="6" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Prazo</th>
+                <th>Situação</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (listaTarefas && listaTarefas.length > 0) { %>
+                <% listaTarefas.forEach((item) => { %>
+                <tr>
+                    <td><%= item.id_tarefa %></td>
+                    <td><%= item.nome_tarefa %></td>
+                    <td><%= moment(item.prazo_tarefa).format('L') %></td>
+                    <td><%= item.situacao_tarefa %></td>
+                    <td><%= item.status_tarefa %></td>
+                    <td>
+                        <a href="/excluir-logico/<%= item.id_tarefa %>"
+                           onclick="return confirm('Deseja excluir esta tarefa?')">
+                            Excluir
+                        </a>
+                    </td>
+                </tr>
+                <% }); %>
+            <% } else { %>
+                <tr>
+                    <td colspan="6">sem tarefas para mostrar</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+</body>
+</html>

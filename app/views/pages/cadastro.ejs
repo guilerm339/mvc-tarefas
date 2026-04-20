@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Tarefas</title>
+</head>
+<body>
+    <h1>Cadastro de Tarefas</h1>
+
+    <% if (erro) { %>
+        <p style="color:red;"><%= erro %></p>
+    <% } %>
+    <% if (sucesso) { %>
+        <p style="color:green;"><%= sucesso %></p>
+    <% } %>
+
+    <form action="/nova-tarefa" method="post">
+        <label for="nome">Tarefa:</label><br>
+        <input type="text" name="nome" id="nome" required><br><br>
+
+        <label for="prazo">Prazo:</label><br>
+        <input type="date" name="prazo" id="prazo" required><br><br>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <br>
+    <a href="/">← Voltar para a lista</a>
+</body>
+</html>
